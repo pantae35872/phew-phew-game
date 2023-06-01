@@ -10,6 +10,7 @@ let won = false;
 let stillstarting = false;
 let stilltexting = false;
 let cooldown = false;
+let score: number;
 
 function start() {
     stillstarting = true;
@@ -19,6 +20,7 @@ function start() {
     }
     losed = false;
     won = false;
+    score = 0;
     player = game.createSprite(0, 4);
     for (let y = 0; y <= 1; y++) {
         for (let x = 0; x <= 5; x++) {
@@ -90,6 +92,24 @@ function win() {
             enemy.delete();
         });
         enemies = [];
+        basic.showString("Your Score is");
+        bullets.forEach((bullet, index) => {
+            bullet.delete();
+        });
+        bullets = [];
+        enemies.forEach((enemy, index) => {
+            enemy.delete();
+        });
+        enemies = [];
+        basic.showNumber(score);
+        bullets.forEach((bullet, index) => {
+            bullet.delete();
+        });
+        bullets = [];
+        enemies.forEach((enemy, index) => {
+            enemy.delete();
+        });
+        enemies = [];
         stilltexting = false;
     }
 }
@@ -138,6 +158,7 @@ basic.forever(function enemies_thread() {
                         enemies.removeAt(enemy_index);
                         bullet.delete();
                         bullets.removeAt(bullet_index);
+                        score++;
                     }
                 }
             });
